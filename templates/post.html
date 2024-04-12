@@ -1,0 +1,55 @@
+{% include "header.html" %}
+
+{% from "bootstrap5/form.html" import render_form %}
+
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{{post.img_url}}')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="post-heading">
+          <h1>{{ post.title }}</h1>
+          <h2 class="subheading">{{ post.subtitle }}</h2>
+          <span class="meta" translate="no"
+            >Posted by
+            <a href="{{ url_for('about') }}">{{ post.author.username }}</a>
+            on {{ post.date }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Post Content -->
+<article>
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div id="google_translate_element"></div>
+        {{ post.body|safe }}
+        <!--TODO: Only show Edit Post button if user id is 1 (admin user) -->
+        {% if current_user.email == post.author.email %}
+          <div class="d-flex justify-content-end mb-4">
+            <a
+              class="btn btn-primary float-right"
+              href="{{url_for('edit_post', post_id=post.id)}}"
+              >Edit Post</a
+            >
+          </div>
+        {% endif %}
+        <!-- Comments Area -->
+      </div>
+    </div>
+  </div>
+</article>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+{% include "footer.html" %}
+
