@@ -148,15 +148,16 @@ def logout():
 @app.route('/')
 def get_all_posts():
     result = db.session.execute(db.select(BlogPost)).scalars().all()
-    page = int(request.args.get("page", 1))
-    start = (page - 1) * 10
-    end = page * 10
-    posts = result[start:end]
-    if not posts:
-        page = 1
-        start = 0
-        end = 10
-        posts = result[start:end]
+    # page = int(request.args.get("page", 1))
+    # start = (page - 1) * 10
+    # end = page * 10
+    # posts = result[start:end]
+    # if not posts:
+        # page = 1
+        # start = 0
+        # end = 10
+        # posts = result[start:end]
+    posts = result[::-1]
     return render_template("index.html", all_posts=posts, page=page, admins=admins)
 
 
