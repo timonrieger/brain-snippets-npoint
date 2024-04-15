@@ -157,6 +157,7 @@ def get_all_posts():
         # start = 0
         # end = 10
         # posts = result[start:end]
+    page = 1
     posts = result[::-1]
     return render_template("index.html", all_posts=posts, page=page, admins=admins)
 
