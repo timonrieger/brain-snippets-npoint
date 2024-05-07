@@ -34,45 +34,14 @@
         </a>
         <p class="post-meta">
           Posted by
-          <a href="{{ url_for('about') }}">{{ post.author.username }}</a>
+          <a href="{{ url_for('about') }}">{{ post.author }}</a>
           on {{post.date}}
-          <!-- TODO: Only show delete button if user id is 1 (admin user) -->
-          {% if current_user.email == post.author.email %}
-          <!-- Trigger Modal -->
-          <a data-bs-toggle="modal" data-bs-target="#modal{{ post.id }}">✘</a>
-          <!-- Modal -->
-          <div class="modal fade" id="modal{{ post.id }}" tabindex="-1" aria-labelledby="deletePost" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-body">
-                  <p>Are you sure you want to delete the following post?<br><b>{{ post.title }}</b><br>This action cannot be undone.</p>
-                </div>
-                <div class="modal-footer">
-                  <a type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</a>
-                  <a type="button" class="btn btn-danger" href="{{ url_for('delete_post', post_id=post.id) }}">Delete</a>
-                </div>
-              </div>
-            </div>
-          </div>
-           {% endif %}
         </p>
 
       </div>
       <!-- Divider-->
       <hr class="my-4" />
       {% endfor %}
-
-      <!-- New Post -->
-      <!-- TODO: Only show Create Post button if user id is 1 (admin user) -->
-      {% if current_user.email in admins %}
-        <div class="d-flex justify-content-end mb-4">
-          <a
-            class="btn btn-primary float-right"
-            href="{{url_for('add_new_post')}}"
-            >Create New Post</a
-          >
-        </div>
-      {% endif %}
 
       <!-- Pager-->
       <div class="d-flex justify-content-end mb-4">
