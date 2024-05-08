@@ -54,9 +54,14 @@ def get_all_posts():
     return render_template("index.html", all_posts=posts, page=page)
 
 
-@app.route("/post/<int:post_id>", methods=["GET", "POST"])
-def show_post(post_id):
-    requested_post = [post for post in blog_data if post["id"] == post_id]
+@app.route("/post/<post_title>", methods=["GET", "POST"])
+def show_post(post_title):
+    # Convert the post_title to lowercase and replace spaces with dashes
+    post_title = post_title.lower().replace(' ', '-')
+
+    # Find the requested post
+    requested_post = [post for post in blog_data if
+                      post["title"].lower().replace(' ', '-') == post_title]
 
     return render_template("post.html", post=requested_post[0])
 
