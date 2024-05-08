@@ -141,7 +141,7 @@ def edit_post(npoint_id):
 
 @app.route("/about")
 def about():
-    return render_template("about.html")
+    return redirect("https://timonrieger.com")
 
 @app.route("/npoint")
 def npoint():
