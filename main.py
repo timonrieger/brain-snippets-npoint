@@ -104,7 +104,6 @@ def add_new_post():
 @app.route("/edit-post/<int:npoint_id>", methods=["GET", "POST"])
 def edit_post(npoint_id):
     post = db.session.execute(db.Select(BlogPost).where(BlogPost.id == 1)).scalar()
-    print(BlogPost.query.all())
     if post:
         edit_form = CreatePostForm(
             title=post.title,
