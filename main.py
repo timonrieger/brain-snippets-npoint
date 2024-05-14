@@ -94,8 +94,8 @@ def add_new_post():
         pyperclip.copy(json_data)
         flash("Post copied to clipboard. Paste here: https://www.npoint.io/docs/55ec3c86cd78032d2742")
 
-        db.session.add(new_post)
-        db.session.commit()
+        #db.session.add(new_post)
+        #db.session.commit()
 
         return redirect(url_for("get_all_posts"))
     return render_template("make-post.html", form=form)
