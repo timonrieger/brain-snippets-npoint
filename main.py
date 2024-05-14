@@ -82,10 +82,10 @@ def add_new_post():
             "id": new_post.id,
             "title": form.title.data,
             "subtitle": form.subtitle.data,
-            "body": form.body.data,
             "date": date.today().strftime("%B %d, %Y"),
             "author": form.author.data,
-            "image_url": form.img_url.data
+            "image_url": form.img_url.data,
+            "body": form.body.data,
         }
         # Convert the dictionary to a JSON string
         json_data = json.dumps(new_post_data, indent=2)
