@@ -31,7 +31,7 @@ def get_all_posts():
     return render_template("index.html", all_posts=posts, page=page)
 
 
-@app.route("/post/<post_title>", methods=["GET", "POST"])
+@app.route("/<post_title>", methods=["GET", "POST"])
 def show_post(post_title):
     # Convert the post_title to lowercase and replace spaces with dashes
     post_title = post_title.lower().replace(' ', '-')
