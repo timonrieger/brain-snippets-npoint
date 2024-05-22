@@ -7,7 +7,7 @@ from forms import CreatePostForm
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.urandom(20)
+app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY")
 
 ckeditor = CKEditor(app)
 Bootstrap5(app)
