@@ -1,44 +1,50 @@
-{% include "header.html" %}
+{% extends "header.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block description %}
+    {{ post.subtitle }} - Blog Post by {{ post.author }}
+{% endblock %}
 
 {% from "bootstrap5/form.html" import render_form %}
 
-<!-- Page Header-->
-<header class="masthead" style="background-image: url('{{post.image_url}}')">
-  <div class="container position-relative px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="post-heading">
-          <h1>{{ post.title }}</h1>
-          <h2 class="subheading">{{ post.subtitle }}</h2>
-        <span class="meta">
-            Posted by
-            <span translate="no"><a href="https://timonrieger.de">{{ post.author }}</a></span>
-            on {{ post.date }}
-        </span>
+{% block content %}
+  <!-- Page Header-->
+  <header class="masthead" style="background-image: url('{{post.image_url}}')">
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <div class="post-heading">
+            <h1>{{ post.title }}</h1>
+            <h2 class="subheading">{{ post.subtitle }}</h2>
+          <span class="meta">
+              Posted by
+              <span translate="no"><a href="https://timonrieger.de">{{ post.author }}</a></span>
+              on {{ post.date }}
+          </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<!-- Post Content -->
-<article>
-  <div class="container px-4 px-lg-5">
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
-        <div id="google_translate_element"></div>
-        {{ post.body|safe }}
+  <!-- Post Content -->
+  <article>
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <div id="google_translate_element"></div>
+          {{ post.body|safe }}
+        </div>
       </div>
     </div>
-  </div>
-</article>
+  </article>
 
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-{% include "footer.html" %}
+  <script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+{% endblock %}
 

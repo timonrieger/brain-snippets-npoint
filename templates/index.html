@@ -1,54 +1,60 @@
-{% include "header.html" %}
+{% extends "layout.html" %}
 
-<!-- Page Header-->
-<header
-  class="masthead"
-  style="background-image: url('../static/assets/img/home-bg.jpg')"
->
-  <div class="container position-relative px-4 px-lg-5">
+{% block title %}Brain Snippets Blog | Timon Rieger{% endblock %}
+
+{% block description %}
+    Read my latest blog post on Brain Snippets. Here I write about Ideas, Thoughts, Conclusions I'd like to share with you.
+{% endblock %}
+
+{% block content %}
+  <!-- Page Header-->
+  <header
+    class="masthead"
+    style="background-image: url('../static/assets/img/home-bg.jpg')"
+  >
+    <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+          <div class="site-heading">
+            <h1>Brain Snippets</h1>
+            <span class="subheading">Ideas, Thoughts and Conclusions I'd like to share with you.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content-->
+  <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
-        <div class="site-heading">
-          <h1>Brain Snippets</h1>
-          <span class="subheading">Ideas, Thoughts and Conclusions I'd like to share with you.</span>
+        {% if get_flashed_messages() %}
+          {% for message in get_flashed_messages() %}
+            <p class=flashes style="color: red">{{ message }}</p>
+          {% endfor %}
+        {% endif %}
+        <!-- Post preview-->
+        {% for post in all_posts %}
+        <div class="post-preview">
+        <a href="{{ url_for('show_post', post_title=post.title|lower|replace(' ', '-')) }}">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <h3 class="post-subtitle">{{ post.subtitle }}</h3>
+          </a>
+          <p class="post-meta">
+            Posted by
+            <a href="https://timonrieger.de">{{ post.author }}</a>
+            on {{post.date}}
+          </p>
+
+        </div>
+        <!-- Divider-->
+        <hr class="my-4" />
+        {% endfor %}
+
+        <!-- Pager-->
+        <div class="d-flex justify-content-end mb-4">
+          <a class="btn btn-secondary text-uppercase" aria-disabled="true" href="{{ url_for('get_all_posts', page=page + 1 ) }}" disabled>Older Posts →</a>
         </div>
       </div>
     </div>
   </div>
-</header>
-<!-- Main Content-->
-<div class="container px-4 px-lg-5">
-  <div class="row gx-4 gx-lg-5 justify-content-center">
-    <div class="col-md-10 col-lg-8 col-xl-7">
-      {% if get_flashed_messages() %}
-        {% for message in get_flashed_messages() %}
-          <p class=flashes style="color: red">{{ message }}</p>
-        {% endfor %}
-      {% endif %}
-      <!-- Post preview-->
-      {% for post in all_posts %}
-      <div class="post-preview">
-      <a href="{{ url_for('show_post', post_title=post.title|lower|replace(' ', '-')) }}">
-          <h2 class="post-title">{{ post.title }}</h2>
-          <h3 class="post-subtitle">{{ post.subtitle }}</h3>
-        </a>
-        <p class="post-meta">
-          Posted by
-          <a href="https://timonrieger.de">{{ post.author }}</a>
-          on {{post.date}}
-        </p>
-
-      </div>
-      <!-- Divider-->
-      <hr class="my-4" />
-      {% endfor %}
-
-      <!-- Pager-->
-      <div class="d-flex justify-content-end mb-4">
-        <a class="btn btn-secondary text-uppercase" aria-disabled="true" href="{{ url_for('get_all_posts', page=page + 1 ) }}" disabled>Older Posts →</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-{% include "footer.html" %}
+{% endblock %}
