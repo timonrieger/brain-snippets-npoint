@@ -48,7 +48,7 @@ def add_new_post():
     if form.validate_on_submit():
 
         new_post_data = {
-            "id": new_post.id,
+            "id": 0,
             "title": form.title.data,
             "subtitle": form.subtitle.data,
             "date": date.today().strftime("%B %d, %Y"),
