@@ -59,9 +59,12 @@ def add_new_post():
         # Convert the dictionary to a JSON string
         json_data = json.dumps(new_post_data, indent=2)
 
-        # Copy the JSON data to the clipboard
-        pyperclip.copy(json_data)
-        flash("Post copied to clipboard. Paste here: https://www.npoint.io/docs/55ec3c86cd78032d2742")
+        try:
+            # Copy the JSON data to the clipboard
+            pyperclip.copy(json_data)
+            flash("Post copied to clipboard. Paste here: https://www.npoint.io/docs/55ec3c86cd78032d2742")
+        except pyperclip.PyperclipException:
+            flash("Failed to copy post to clipboard. Please copy manually.")
 
         return redirect(url_for("get_all_posts"))
     return render_template("make-post.html", form=form)
