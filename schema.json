@@ -1,0 +1,9 @@
+{
+    "id": "1",
+    "title": "This is a title",
+    "subtitle": "This is a subtitle",
+    "date": "Januar 1, 2024",
+    "author": "John Doe",
+    "image_url": "https://example.com/image.jpg",
+    "body": "<h2>&nbsp;</h2>\r\n\r\n<h2>About Lego</h2>"
+  }

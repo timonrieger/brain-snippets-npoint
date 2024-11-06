@@ -1,21 +1,23 @@
 from datetime import date
-import requests, json, pyperclip
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap5
 from flask_ckeditor import CKEditor
 from forms import CreatePostForm
 import os
+import requests
+import json
+import pyperclip
+import dotenv
+
+dotenv.load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("FLASK_SECRET_KEY")
+app.config['SECRET_KEY'] = os.getenv("SECRET")
 
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
-EMAIL = os.environ.get("EMAIL")
-PASSWORD = os.environ.get("PASSWORD")
-
-blog_data = requests.get("https://api.npoint.io/55ec3c86cd78032d2742").json()[::-1]
+blog_data = requests.get(f"https://api.npoint.io/{os.getenv("NPOINT")}").json()[::-1]
 
 @app.route('/')
 def get_all_posts():
@@ -62,7 +64,7 @@ def add_new_post():
         try:
             # Copy the JSON data to the clipboard
             pyperclip.copy(json_data)
-            flash("Post copied to clipboard. Paste here: https://www.npoint.io/docs/55ec3c86cd78032d2742")
+            flash(f"Post copied to clipboard. Paste here: https://www.npoint.io/docs/{os.getenv("NPOINT")}")
         except pyperclip.PyperclipException:
             flash("Failed to copy post to clipboard. Please copy manually.")
 
@@ -71,7 +73,7 @@ def add_new_post():
 
 @app.route("/npoint")
 def npoint():
-    return redirect("https://www.npoint.io/docs/55ec3c86cd78032d2742")
+    return redirect(f"https://www.npoint.io/docs/{os.getenv("NPOINT")}")
 
 
 if __name__ == "__main__":
