@@ -61,7 +61,7 @@ View a deployed version with this code at [blog.timonrieger.de](https://blog.tim
    ```
 
 6. Set the required environment variables in a `.env` at the root directory. [Create a json bin first](https://www.npoint.io/):
-   - `SECRET` (your flask secret key)
+   - `SECRET_KEY` (your flask secret key)
    - `n:pOINT` (the id of your npoint bin e.g. https://www.npoint.io/docs/55ec3c86cd78032d2742 > n:pOINT=55ec3c86cd78032d2742)
 
 7. Run the application:

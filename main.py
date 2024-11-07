@@ -12,7 +12,7 @@ import dotenv
 dotenv.load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv("SECRET")
+app.config['SECRET_KEY_KEY'] = os.getenv("SECRET_KEY")
 
 ckeditor = CKEditor(app)
 Bootstrap5(app)
