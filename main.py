@@ -17,7 +17,11 @@ app.config['SECRET_KEY_KEY'] = os.getenv("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
-blog_data = requests.get(f"https://api.npoint.io/{os.getenv("NPOINT")}").json()[::-1]
+try:
+    blog_data = requests.get(f"https://api.npoint.io/{os.getenv("NPOINT")}").json()[::-1]
+except Exception:
+    with open("static/assets/backup.json", "r") as file:
+        blog_data = json.load(file)[::-1]
 
 @app.route('/')
 def get_all_posts():
